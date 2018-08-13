@@ -31,20 +31,27 @@ typedef struct {
 } rectangle;
 
 rectangle canonicalize(rectangle r) {
-  //r.x = abs(r.x);
-  //r.y = abs(r.y);
-  //r.width = abs(r.width);
-  //r.height = abs(r.height);
-  
-  //return r;
+  rectangle result;
 
-  rectangle result = {abs(r.x), abs(r.y), abs(r.width), abs(r.height)};
-  
+  result.x = r.x;
+  result.y = r.y;
+  result.width = abs(r.width);
+  result.height = abs(r.height);
+
   return result;
 }
 rectangle intersection(rectangle r1, rectangle r2) {
-  //WRITE THIS FUNCTION
-  return r1;
+  rectangle result;
+
+  r1 = canonicalize(r1);
+  r2 = canonicalize(r2);
+
+  result.x = max(r1.x, r2.x);
+  result.y = max(r1.y, r2.y);
+  result.width = min(r1.width, r2.width);
+  result.height = min(r1.height, r2.height);
+  
+  return result;
 }
 
 //You should not need to modify any code below this line
