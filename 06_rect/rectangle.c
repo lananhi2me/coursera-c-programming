@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
-//I've provided "min" and "max" functions in
-//case they are useful to you
+
 int min (int a, int b) {
   if (a < b) {
     return a;
   }
   return b;
 }
+
 int max (int a, int b) {
   if (a > b) {
     return a;
@@ -15,12 +15,32 @@ int max (int a, int b) {
   return b;
 }
 
-//Declare your rectangle structure here!
+int abs(int a) {
+  if (a < 0) {
+    return a * -1;
+  } else {
+    return a;
+  }
+}
 
+typedef struct {
+  int x;
+  int y;
+  int width;
+  int height;
+} rectangle;
 
 rectangle canonicalize(rectangle r) {
-  //WRITE THIS FUNCTION
-  return r;
+  //r.x = abs(r.x);
+  //r.y = abs(r.y);
+  //r.width = abs(r.width);
+  //r.height = abs(r.height);
+  
+  //return r;
+
+  rectangle result = {abs(r.x), abs(r.y), abs(r.width), abs(r.height)};
+  
+  return result;
 }
 rectangle intersection(rectangle r1, rectangle r2) {
   //WRITE THIS FUNCTION
