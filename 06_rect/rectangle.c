@@ -33,13 +33,30 @@ typedef struct {
 rectangle canonicalize(rectangle r) {
   rectangle result;
 
-  result.x = r.x;
-  result.y = r.y;
-  result.width = abs(r.width);
-  result.height = abs(r.height);
-
+  if (r.width < 0) {
+    result.x = r.x + r.width;
+    result.width = r.width * -1;
+  } else {
+    result.x = r.x;
+    result.width = r.width;
+  }
+  
+  if (r.height < 0) {
+    result.y = r.y + r.height;
+    result.height = r.height * -1;
+  } else {
+    result.y = r.y;
+    result.height = r.height;
+  }
+  
   return result;
 }
+
+unsigned char doesIntersect(rectangle r1, rectangle r2) {
+  return 1; // Implement later
+}
+
+
 rectangle intersection(rectangle r1, rectangle r2) {
   rectangle result;
 
@@ -48,8 +65,14 @@ rectangle intersection(rectangle r1, rectangle r2) {
 
   result.x = max(r1.x, r2.x);
   result.y = max(r1.y, r2.y);
-  result.width = min(r1.width, r2.width);
-  result.height = min(r1.height, r2.height);
+
+  if (doesIntersect(r1, r2)) {
+    result.width = min(abs(r1.x - (r2.x + r2.width)), abs(r2.x - (r1.x + r1.width)));
+    result.height = min(abs(r1.y - (r2.y + r2.height)), abs(r2.y - (r1.y + r1.height)));
+  } else {
+    result.width = 0;
+    result.height = 0;
+  }
   
   return result;
 }
