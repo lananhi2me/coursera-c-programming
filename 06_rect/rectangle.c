@@ -53,7 +53,20 @@ rectangle canonicalize(rectangle r) {
 }
 
 unsigned char doesIntersect(rectangle r1, rectangle r2) {
-  return 1; // Implement later
+  r1 = canonicalize(r1);
+  r2 = canonicalize(r2);
+
+  // (min(r1.x, r2.x) <= max(r1.x, r2.x))
+  // (max(r1.x, r2.x) <= min(r2.x + r2.width)) && (r1.y < (r2.y + r2.height))
+  
+  if ((((r1.x <= r2.x + r2.width) && (r1.x + r1.width >= r2.x + r2.width)) ||
+       ((r2.x <= r1.x + r1.width) && (r2.x + r2.width >= r1.x + r1.width))) &&
+      (((r1.y <= r2.y + r2.height) && (r1.y + r1.height >= r2.y + r2.height)) ||
+       ((r2.y <= r1.y + r1.height) && (r2.y + r2.height >= r1.y + r1.height)))) {
+    return 1;
+  } else {
+    return 0;
+  }
 }
 
 
@@ -67,8 +80,11 @@ rectangle intersection(rectangle r1, rectangle r2) {
   result.y = max(r1.y, r2.y);
 
   if (doesIntersect(r1, r2)) {
-    result.width = min(abs(r1.x - (r2.x + r2.width)), abs(r2.x - (r1.x + r1.width)));
-    result.height = min(abs(r1.y - (r2.y + r2.height)), abs(r2.y - (r1.y + r1.height)));
+    // result.width = min(abs(r1.x - (r2.x + r2.width)), abs(r2.x - (r1.x + r1.width)));
+    // result.height = min(abs(r1.y - (r2.y + r2.height)), abs(r2.y - (r1.y + r1.height)));
+
+    result.width = abs(max(r1.x, r2.x) - min(r1.x + r1.width, r2.x + r2.width));
+    result.height = abs(max(r1.y, r2.y) - min(r1.y + r1.height, r2.y + r2.height));
   } else {
     result.width = 0;
     result.height = 0;
