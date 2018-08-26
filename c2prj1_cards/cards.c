@@ -11,13 +11,13 @@ void assert_card_valid(card_t c) {
 
 const char * ranking_to_string(hand_ranking_t r) {
   if (r == STRAIGHT_FLUSH) {
-    return "STRAIGHT FLUSH";
+    return "STRAIGHT_FLUSH";
   }
   if (r == FOUR_OF_A_KIND) {
-    return "FOUR OF A KIND";
+    return "FOUR_OF_A_KIND";
   }
   if (r == FULL_HOUSE) {
-    return "FULL HOUSE";
+    return "FULL_HOUSE";
   }
   if (r == FLUSH) {
     return "FLUSH";
@@ -26,10 +26,10 @@ const char * ranking_to_string(hand_ranking_t r) {
     return "STRAIGHT";
   }
   if (r == THREE_OF_A_KIND) {
-    return "THREE OF A KIND";
+    return "THREE_OF_A_KIND";
   }
   if (r == TWO_PAIR) {
-    return "TWO PAIR";
+    return "TWO_PAIR";
   }
   if (r == PAIR) {
     return "PAIR";
