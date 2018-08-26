@@ -92,7 +92,7 @@ card_t card_from_letters(char value_let, char suit_let) {
   if (value_let >= '0' + 2 && value_let <= '0' + 9) {
     result.value = value_let - '0';
   } else if (value_let == '0') {
-    result.value = 0;
+    result.value = 10;
   } else if (value_let == 'J') {
     result.value = VALUE_JACK;
   } else if (value_let == 'Q') {
