@@ -11,31 +11,31 @@ void assert_card_valid(card_t c) {
 
 const char * ranking_to_string(hand_ranking_t r) {
   if (r == STRAIGHT_FLUSH) {
-    return "Straight flush";
+    return "STRAIGHT FLUSH";
   }
   if (r == FOUR_OF_A_KIND) {
-    return "Four of a kind";
+    return "FOUR OF A KIND";
   }
   if (r == FULL_HOUSE) {
-    return "Full house";
+    return "FULL HOUSE";
   }
   if (r == FLUSH) {
-    return "Flush";
+    return "FLUSH";
   }
   if (r == STRAIGHT) {
-    return "Straight";
+    return "STRAIGHT";
   }
   if (r == THREE_OF_A_KIND) {
-    return "Three of a kind";
+    return "THREE OF A KIND";
   }
   if (r == TWO_PAIR) {
-    return "Two pair";
+    return "TWO PAIR";
   }
   if (r == PAIR) {
-    return "Pair";
+    return "PAIR";
   }
   if (r >= NOTHING) {
-    return "Nothing";
+    return "NOTHING";
   }
   fprintf(stderr, "Invalid ranking!");
   exit(1);
