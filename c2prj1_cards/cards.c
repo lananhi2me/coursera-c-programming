@@ -124,6 +124,7 @@ card_t card_from_letters(char value_let, char suit_let) {
 
 card_t card_from_num(unsigned c) {
   assert(c >= 0 && c < 52);
-  card_t result = {c % 13, c / 13};
+  
+  card_t result = {c % 13 + 2, c / 13};
   return result;
 }
