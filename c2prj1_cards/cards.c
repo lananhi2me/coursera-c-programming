@@ -87,7 +87,7 @@ void print_card(card_t c) {
 }
 
 card_t card_from_letters(char value_let, char suit_let) {
-  assert(value_let >= 2 && value_let <= 14);
+  assert((value_let >= 2 && value_let <= 14 && value_let != 10) || value_let == 0);
   assert(suit_let == 's' || suit_let == 'h' || suit_let == 'd' || suit_let == 'c');
   
   card_t result = {value_let, suit_let};
