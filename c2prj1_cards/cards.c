@@ -89,8 +89,10 @@ void print_card(card_t c) {
 card_t card_from_letters(char value_let, char suit_let) {
   card_t result;
 
-  if ((value_let >= '0' + 2 && value_let <= '0' + 9) || value_let == '0') {
+  if (value_let >= '0' + 2 && value_let <= '0' + 9) {
     result.value = value_let - '0';
+  } else if (value_let == '0') {
+    result.value = 0;
   } else if (value_let == 'J') {
     result.value = VALUE_JACK;
   } else if (value_let == 'Q') {
