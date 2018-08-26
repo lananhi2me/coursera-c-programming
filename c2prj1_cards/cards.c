@@ -87,10 +87,36 @@ void print_card(card_t c) {
 }
 
 card_t card_from_letters(char value_let, char suit_let) {
-  assert((value_let >= 2 && value_let <= 14 && value_let != 10) || value_let == 0);
-  assert(suit_let == 's' || suit_let == 'h' || suit_let == 'd' || suit_let == 'c');
+  card_t result;
+
+  if ((value_let >= '0' + 2 && value_let <= '0' + 9) || value_let == '0') {
+    result.value = value_let - '0';
+  } else if (value_let == 'J') {
+    result.value = VALUE_JACK;
+  } else if (value_let == 'Q') {
+    result.value = VALUE_QUEEN;
+  } else if (value_let == 'K') {
+    result.value = VALUE_KING;
+  } else if (value_let == 'A') {
+    result.value = VALUE_ACE;
+  } else {
+    fprintf(stderr, "Invalid value!");
+    exit(1);
+  }
+
+  if (suit_let == 's') {
+    result.suit = 0;
+  } else if (suit_let == 'h') {
+    result.suit = 1;
+  } else if (suit_let == 'd') {
+    result.suit = 2;
+  } else if (suit_let == 'c') {
+    result.suit = 3;
+  } else {
+    fprintf(stderr, "Invalid suit!");
+    exit(1);
+  }
   
-  card_t result = {value_let, suit_let};
   return result;
 }
 
