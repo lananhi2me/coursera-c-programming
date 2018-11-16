@@ -4,6 +4,9 @@
 
 void reverse(char * str) {
   int len = strlen(str);
+  if (len < 2) {
+    return;
+  }
   char temp[len + 1];
   strncpy(temp, str, len + 1);
   char* t = &temp[len - 1];
