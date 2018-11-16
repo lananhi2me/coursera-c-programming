@@ -5,13 +5,13 @@
 void reverse(char * str) {
   int len = strlen(str);
   char temp[len + 1];
-  temp[len] = 0;
-  int k = 0;
+  strncpy(temp, str, len + 1);
+  char* t = &temp[len - 1];
 
-  for (int i = len - 1; i > -1; i--) {
-    temp[k++] = str[i];
+  for (int i = 0; i < len; i++) {
+    *str++ = *t--;
   }
-  str = temp;
+  *str = 0;
 }
 
 int main(void) {
