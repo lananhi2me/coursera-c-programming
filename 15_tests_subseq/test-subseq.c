@@ -43,12 +43,8 @@ int main() {
   if (maxSeq(test09, 1) != 1) {
     return EXIT_FAILURE; 
   }
-  int test10[] = {};
-  if (maxSeq(test10, 0) != 0) {
-    return EXIT_FAILURE;
-  }
-  int test11[] = {23, -500, 0, 20, 123, 450, 1234, 20005, 40};
-  if (maxSeq(test11, 9) != 7) {
+  int test10[] = {23, -500, 0, 20, 123, 450, 1234, 20005, 40};
+  if (maxSeq(test10, 9) != 7) {
     return EXIT_FAILURE;
   }
   
