@@ -19,7 +19,7 @@ int deck_contains(deck_t* d, card_t c) {
 }
 
 void shuffle(deck_t* d){
-  for (int i = 0; i < d->n_cards - 1; i++) {
+  for (int i = 0; i < d->n_cards; i++) {
     long k = random() % d->n_cards;
     card_t* temp = d->cards[k];
     d->cards[k] = d->cards[i];
