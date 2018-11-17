@@ -1,4 +1,4 @@
-Grading at Sat Nov 17 09:41:57 UTC 2018
+Grading at Sat Nov 17 09:49:39 UTC 2018
 Compiling deck.c
 Compiling cards.c
 Linking cards.o deck.o deck-c4.o and the grader's .o file
