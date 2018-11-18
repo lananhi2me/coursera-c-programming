@@ -1,0 +1,11 @@
+Kc Ac Jh 8s 9c 2s ; Ah Kh 0s 7c 7h 3c
+2c 4s 6h 8d 0c ; Ac 3s 5h 7d 9c
+2c 4s 6h 8d 0c ; 2d 3h 4c 5c 6s
+2d 4d 6d 9d Qd ; 2c 4s 6h 8d 0c
+9d 7s 6c 4h 2d ; 9h 7c 6s 4d 3c
+Ac As Kc Kh 4d ; Ad Ah Kd Ks 3h
+Js 7c 7h 4s 3d 3h ; Qs 7d 7s 5c 2d 2h
+
+rbreak cards.c:.
+rbreak deck.c:.
+rbreak eval.c:.
