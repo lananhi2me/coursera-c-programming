@@ -9,6 +9,7 @@ void print_hand(deck_t* hand){
       printf("Null card pointer");
     }
     print_card(*(hand->cards[i]));
+    printf(" ");
   }
 }
 
