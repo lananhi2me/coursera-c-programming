@@ -4,43 +4,145 @@
 #include <assert.h>
 
 int card_ptr_comp(const void * vp1, const void * vp2) {
+  const card_t* cp1 = (card_t*) vp1;
+  const card_t* cp2 = (card_t*) vp2;
+
+  if (cp1->value > cp2->value) {
+    return -1;
+  } else if (cp1->value < cp2->value) {
+    return 1;
+  } else if (cp1->suit > cp2->suit) {
+    return -1;
+  } else if (cp1->suit < cp2->suit) {
+    return 1;
+  }
   return 0;
 }
 
 suit_t flush_suit(deck_t * hand) {
- return NUM_SUITS;
+  int count[4];
+
+  for (int i = 0; i < hand->n_cards; i++) {
+    if(++count[hand->cards[i].suit] >= 5) {
+      return count[hand->cards[i].suit];
+    }
+  }
+  return NUM_SUITS;
 }
 
 unsigned get_largest_element(unsigned * arr, size_t n) {
- return 0;
+  unsigned max = arr[0];
+
+  for (int i = 0; i < n; i++) {
+    if (arr[i] > max) {
+      max = arr[i];
+    }
+  }
+  return max;
 }
 
-size_t get_match_index(unsigned * match_counts, size_t n,unsigned n_of_akind){
-
- return 0;
+size_t get_match_index(unsigned * match_counts, size_t n, unsigned n_of_akind){
+  for (int i = 0; i < n; i++) {
+    if (match_counts[i] == n_of_akind) {
+      return i;
+    }
+  }
+  return -1; // Not sure about what this should be
 }
-ssize_t  find_secondary_pair(deck_t * hand,
-			     unsigned * match_counts,
-			     size_t match_idx) {
+
+ssize_t find_secondary_pair(deck_t * hand, unsigned * match_counts, size_t match_idx) {
+  for (int i = match_idx; i < hand->n_cards; i++) {
+    if (match_counts[i] > 1 && match_counts[i] != match_counts[idx]) {
+      return i;
+    }
+  }
   return -1;
 }
 
 int is_straight_at(deck_t * hand, size_t index, suit_t fs) {
-  return 0;
+  if ((*(deck_t->cards[index])).value == 14) {
+    return is_ace_low_straight_at(hand, index, fs);
+  } else {
+    return is_n_length_straight_at(hand, index, fs, 5);
+  }
 }
 
-hand_eval_t build_hand_from_match(deck_t * hand,
-				  unsigned n,
-				  hand_ranking_t what,
-				  size_t idx) {
+int is_n_length_straight_at(deck_t * hand, size_t index, suit_t fs, int n) {
+  for (int i = index; i < index + n - 1 && (i + index + n - 1) < hand->n_cards; i++) {
+    card_t c1 = *(hand->cards[i]);
+    card_t c2 = *(hand->cards[i + 1]);
 
-  hand_eval_t ans;
+    if (fs == NUM_SUITS) {
+      if (c1.value != c2.value - 1) {
+	return 0;
+      }
+    } else if (c1.value != c2.value - 1 && c1.suit != c2.suit) {
+      return 0;
+    }
+
+  }
+  return 1;
+}
+
+int is_ace_low_straight_at(deck_t * hand, size_t index, suit_t fs) {
+  int five_idx = -1;
+
+  for (int i = index + 1; i < hand->n_cards; i++) {
+    if ((*(hand->cards[i])).value == 5) {
+      five_idx = i;
+      break;
+    }
+  }
+  if (five_idx == -1) {
+    return 0;
+  }
+  if (fs != NUM_SUITS && (*(hand->cards[index])).suit != (*(hand->cards[five_idx])).suit) {
+    return 0;
+  }
+  if (is_n_length_straight_at(hand, five_idx, fs) == 1) {
+    return -1;
+  } else {
+    return 0;
+  }
+}
+
+hand_eval_t build_hand_from_match(deck_t * hand, unsigned n, hand_ranking_t what, size_t idx) {
+  card_t* cards[5];
+  int i, k;
+
+  for (i = 0; i < n; i++) {
+    cards[i] = hand->cards[idx + i];
+  }
+  for (i = 0, k = n; i < hand->n_cards; i++) {
+    if (!(i >= idx && i < idx + n)) {
+      cards[k++] = hand->cards[i];
+    }
+  }
+
+  hand_eval_t ans = {what, cards};
   return ans;
 }
 
-
 int compare_hands(deck_t * hand1, deck_t * hand2) {
+  qsort(hand1->cards, hand1->n_cards, sizeof(card_t), card_ptr_comp);
+  qsort(hand2->cards, hand2->n_cards, sizeof(card_t), card_ptr_comp);
 
+  hand_eval_t h1 = evaluate_hand(hand1);
+  hand_eval_t h2 = evaluate_hand(hand2);
+
+  if (h1.ranking < h2.ranking) {
+    return 1;
+  }
+  if (h1.ranking > h2.ranking) {
+    return -1;
+  }
+
+  for (int i = 0; i < 5; i++) {
+    int res = (*(h1->cards[i])).value - (*(h2->cards[i])).value;
+    if (!res) {
+      return res;
+    }
+  }
   return 0;
 }
 
@@ -51,7 +153,7 @@ int compare_hands(deck_t * hand1, deck_t * hand2) {
 //implementation in eval-c4.o) so that the
 //other functions we have provided can make
 //use of get_match_counts.
-unsigned * get_match_counts(deck_t * hand) ;
+unsigned * get_match_counts(deck_t * hand);
 
 // We provide the below functions.  You do NOT need to modify them
 // In fact, you should not modify them!
@@ -177,7 +279,7 @@ hand_eval_t evaluate_hand(deck_t * hand) {
       ans.cards[4] = hand->cards[2];
     }
     else {       //e.g., A A K K Q
-      ans.cards[4] = hand->cards[4]; 
+      ans.cards[4] = hand->cards[4];
     }
     return ans;
   }
