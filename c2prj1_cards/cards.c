@@ -66,16 +66,16 @@ char value_letter(card_t c) {
 
 
 char suit_letter(card_t c) {
-  if (c.suit == 0) {
+  if (c.suit == SPADES) {
     return 's';
   }
-  if (c.suit == 1) {
+  if (c.suit == HEARTS) {
     return 'h';
   }
-  if (c.suit == 2) {
+  if (c.suit == DIAMONDS) {
     return 'd';
   }
-  if (c.suit == 3) {
+  if (c.suit == CLUBS) {
     return 'c';
   }
   fprintf(stderr, "Invalid suit!");
@@ -107,24 +107,24 @@ card_t card_from_letters(char value_let, char suit_let) {
   }
 
   if (suit_let == 's') {
-    result.suit = 0;
+    result.suit = SPADES;
   } else if (suit_let == 'h') {
-    result.suit = 1;
+    result.suit = HEARTS;
   } else if (suit_let == 'd') {
-    result.suit = 2;
+    result.suit = DIAMONDS;
   } else if (suit_let == 'c') {
-    result.suit = 3;
+    result.suit = CLUBS;
   } else {
     fprintf(stderr, "Invalid suit!");
     exit(1);
   }
-  
+
   return result;
 }
 
 card_t card_from_num(unsigned c) {
   assert(c >= 0 && c < 52);
-  
+
   card_t result = {c % 13 + 2, c / 13};
   return result;
 }
