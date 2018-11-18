@@ -6,17 +6,17 @@
 int is_n_length_straight_at(deck_t * hand, size_t index, suit_t fs, int n);
 int is_ace_low_straight_at(deck_t * hand, size_t index, suit_t fs);
 
-int card_ptr_comp(const void * vp1, const void * vp2) {
-  card_t cp1 = *(card_t*) vp1;
-  card_t cp2 = *(card_t*) vp2;
-
-  if (cp1.value > cp2.value) {
+int card_ptr_comp(const void* vp1, const void* vp2) {
+  card_t* cp1 = *(card_t**) vp1;
+  card_t* cp2 = *(card_t**) vp2;
+  
+  if (cp1->value > cp2->value) {
     return -1;
-  } else if (cp1.value < cp2.value) {
+  } else if (cp1->value < cp2->value) {
     return 1;
-  } else if (cp1.suit > cp2.suit) {
+  } else if (cp1->suit > cp2->suit) {
     return -1;
-  } else if (cp1.suit < cp2.suit) {
+  } else if (cp1->suit < cp2->suit) {
     return 1;
   }
   return 0;
@@ -134,8 +134,8 @@ hand_eval_t build_hand_from_match(deck_t * hand, unsigned n, hand_ranking_t what
 }
 
 int compare_hands(deck_t * hand1, deck_t * hand2) {
-  qsort(hand1->cards, hand1->n_cards, sizeof(card_t), card_ptr_comp);
-  qsort(hand2->cards, hand2->n_cards, sizeof(card_t), card_ptr_comp);
+  qsort(hand1->cards, hand1->n_cards, sizeof(hand1->cards[0]), card_ptr_comp);
+  qsort(hand2->cards, hand2->n_cards, sizeof(hand1->cards[0]), card_ptr_comp);
 
   hand_eval_t h1 = evaluate_hand(hand1);
   hand_eval_t h2 = evaluate_hand(hand2);
