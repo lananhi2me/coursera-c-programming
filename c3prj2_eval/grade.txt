@@ -1,0 +1,540 @@
+Grading at Sun Nov 18 05:52:42 UTC 2018
+Compiling your code
+rm test-eval deck.o eval.o cards.o #poker
+Makefile:10: recipe for target 'clean' failed
+cc -ggdb3 -Wall -Werror -pedantic -std=gnu99   -c -o deck.o deck.c
+cc -ggdb3 -Wall -Werror -pedantic -std=gnu99   -c -o eval.o eval.c
+cc -ggdb3 -Wall -Werror -pedantic -std=gnu99   -c -o cards.o cards.c
+gcc -o test-eval -ggdb3 deck.o deck-c4.o eval-c4.o eval.o test-eval.o cards.o input.o future.o
+Testcase 1: Trying hands with nothing
+Valgrind returned an error status
+==264== Memcheck, a memory error detector
+==264== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==264== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==264== Command: ./test-eval inp.1.txt
+==264== Parent PID: 263
+==264== 
+==264== Conditional jump or move depends on uninitialised value(s)
+==264==    at 0x401639: flush_suit (eval.c:29)
+==264==    by 0x40260F: describe_hand (test-eval.c:36)
+==264==    by 0x402A67: main (test-eval.c:116)
+==264== 
+==264== Conditional jump or move depends on uninitialised value(s)
+==264==    at 0x40261D: describe_hand (test-eval.c:37)
+==264==    by 0x402A67: main (test-eval.c:116)
+==264== 
+==264== Conditional jump or move depends on uninitialised value(s)
+==264==    at 0x402D57: suit_letter (cards.c:69)
+==264==    by 0x402647: describe_hand (test-eval.c:43)
+==264==    by 0x402A67: main (test-eval.c:116)
+==264== 
+==264== Conditional jump or move depends on uninitialised value(s)
+==264==    at 0x402D66: suit_letter (cards.c:72)
+==264==    by 0x402647: describe_hand (test-eval.c:43)
+==264==    by 0x402A67: main (test-eval.c:116)
+==264== 
+==264== Conditional jump or move depends on uninitialised value(s)
+==264==    at 0x402D75: suit_letter (cards.c:75)
+==264==    by 0x402647: describe_hand (test-eval.c:43)
+==264==    by 0x402A67: main (test-eval.c:116)
+==264== 
+==264== Conditional jump or move depends on uninitialised value(s)
+==264==    at 0x402D84: suit_letter (cards.c:78)
+==264==    by 0x402647: describe_hand (test-eval.c:43)
+==264==    by 0x402A67: main (test-eval.c:116)
+==264== 
+==264== 
+==264== HEAP SUMMARY:
+==264==     in use at exit: 896 bytes in 18 blocks
+==264==   total heap usage: 30 allocs, 12 frees, 9,328 bytes allocated
+==264== 
+==264== LEAK SUMMARY:
+==264==    definitely lost: 0 bytes in 0 blocks
+==264==    indirectly lost: 0 bytes in 0 blocks
+==264==      possibly lost: 0 bytes in 0 blocks
+==264==    still reachable: 896 bytes in 18 blocks
+==264==         suppressed: 0 bytes in 0 blocks
+==264== Rerun with --leak-check=full to see details of leaked memory
+==264== 
+==264== For counts of detected and suppressed errors, rerun with: -v
+==264== Use --track-origins=yes to see where uninitialised values come from
+==264== ERROR SUMMARY: 7 errors from 6 contexts (suppressed: 0 from 0)
+Testcase 2: Trying hands with pairs
+Valgrind returned an error status
+==269== Memcheck, a memory error detector
+==269== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==269== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==269== Command: ./test-eval inp.2.txt
+==269== Parent PID: 268
+==269== 
+==269== Conditional jump or move depends on uninitialised value(s)
+==269==    at 0x401639: flush_suit (eval.c:29)
+==269==    by 0x40260F: describe_hand (test-eval.c:36)
+==269==    by 0x402A67: main (test-eval.c:116)
+==269== 
+==269== Conditional jump or move depends on uninitialised value(s)
+==269==    at 0x40261D: describe_hand (test-eval.c:37)
+==269==    by 0x402A67: main (test-eval.c:116)
+==269== 
+==269== Conditional jump or move depends on uninitialised value(s)
+==269==    at 0x402D57: suit_letter (cards.c:69)
+==269==    by 0x402647: describe_hand (test-eval.c:43)
+==269==    by 0x402A67: main (test-eval.c:116)
+==269== 
+==269== Conditional jump or move depends on uninitialised value(s)
+==269==    at 0x402D66: suit_letter (cards.c:72)
+==269==    by 0x402647: describe_hand (test-eval.c:43)
+==269==    by 0x402A67: main (test-eval.c:116)
+==269== 
+==269== Conditional jump or move depends on uninitialised value(s)
+==269==    at 0x402D75: suit_letter (cards.c:75)
+==269==    by 0x402647: describe_hand (test-eval.c:43)
+==269==    by 0x402A67: main (test-eval.c:116)
+==269== 
+==269== Conditional jump or move depends on uninitialised value(s)
+==269==    at 0x402D84: suit_letter (cards.c:78)
+==269==    by 0x402647: describe_hand (test-eval.c:43)
+==269==    by 0x402A67: main (test-eval.c:116)
+==269== 
+==269== 
+==269== HEAP SUMMARY:
+==269==     in use at exit: 880 bytes in 17 blocks
+==269==   total heap usage: 28 allocs, 11 frees, 9,272 bytes allocated
+==269== 
+==269== LEAK SUMMARY:
+==269==    definitely lost: 0 bytes in 0 blocks
+==269==    indirectly lost: 0 bytes in 0 blocks
+==269==      possibly lost: 0 bytes in 0 blocks
+==269==    still reachable: 880 bytes in 17 blocks
+==269==         suppressed: 0 bytes in 0 blocks
+==269== Rerun with --leak-check=full to see details of leaked memory
+==269== 
+==269== For counts of detected and suppressed errors, rerun with: -v
+==269== Use --track-origins=yes to see where uninitialised values come from
+==269== ERROR SUMMARY: 8 errors from 6 contexts (suppressed: 0 from 0)
+Testcase 3: Trying hands with 2 pairs
+Valgrind returned an error status
+==274== Memcheck, a memory error detector
+==274== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==274== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==274== Command: ./test-eval inp.3.txt
+==274== Parent PID: 273
+==274== 
+==274== Conditional jump or move depends on uninitialised value(s)
+==274==    at 0x401639: flush_suit (eval.c:29)
+==274==    by 0x40260F: describe_hand (test-eval.c:36)
+==274==    by 0x402A67: main (test-eval.c:116)
+==274== 
+==274== Conditional jump or move depends on uninitialised value(s)
+==274==    at 0x40261D: describe_hand (test-eval.c:37)
+==274==    by 0x402A67: main (test-eval.c:116)
+==274== 
+==274== Conditional jump or move depends on uninitialised value(s)
+==274==    at 0x402D57: suit_letter (cards.c:69)
+==274==    by 0x402647: describe_hand (test-eval.c:43)
+==274==    by 0x402A67: main (test-eval.c:116)
+==274== 
+==274== Conditional jump or move depends on uninitialised value(s)
+==274==    at 0x402D66: suit_letter (cards.c:72)
+==274==    by 0x402647: describe_hand (test-eval.c:43)
+==274==    by 0x402A67: main (test-eval.c:116)
+==274== 
+==274== Conditional jump or move depends on uninitialised value(s)
+==274==    at 0x402D75: suit_letter (cards.c:75)
+==274==    by 0x402647: describe_hand (test-eval.c:43)
+==274==    by 0x402A67: main (test-eval.c:116)
+==274== 
+==274== Conditional jump or move depends on uninitialised value(s)
+==274==    at 0x402D84: suit_letter (cards.c:78)
+==274==    by 0x402647: describe_hand (test-eval.c:43)
+==274==    by 0x402A67: main (test-eval.c:116)
+==274== 
+==274== 
+==274== HEAP SUMMARY:
+==274==     in use at exit: 864 bytes in 16 blocks
+==274==   total heap usage: 26 allocs, 10 frees, 9,216 bytes allocated
+==274== 
+==274== LEAK SUMMARY:
+==274==    definitely lost: 0 bytes in 0 blocks
+==274==    indirectly lost: 0 bytes in 0 blocks
+==274==      possibly lost: 0 bytes in 0 blocks
+==274==    still reachable: 864 bytes in 16 blocks
+==274==         suppressed: 0 bytes in 0 blocks
+==274== Rerun with --leak-check=full to see details of leaked memory
+==274== 
+==274== For counts of detected and suppressed errors, rerun with: -v
+==274== Use --track-origins=yes to see where uninitialised values come from
+==274== ERROR SUMMARY: 6 errors from 6 contexts (suppressed: 0 from 0)
+Testcase 4: Trying hands with 3 of a kind
+Valgrind returned an error status
+==279== Memcheck, a memory error detector
+==279== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==279== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==279== Command: ./test-eval inp.4.txt
+==279== Parent PID: 278
+==279== 
+==279== Conditional jump or move depends on uninitialised value(s)
+==279==    at 0x401639: flush_suit (eval.c:29)
+==279==    by 0x40260F: describe_hand (test-eval.c:36)
+==279==    by 0x402A67: main (test-eval.c:116)
+==279== 
+==279== Conditional jump or move depends on uninitialised value(s)
+==279==    at 0x40261D: describe_hand (test-eval.c:37)
+==279==    by 0x402A67: main (test-eval.c:116)
+==279== 
+==279== Conditional jump or move depends on uninitialised value(s)
+==279==    at 0x402D57: suit_letter (cards.c:69)
+==279==    by 0x402647: describe_hand (test-eval.c:43)
+==279==    by 0x402A67: main (test-eval.c:116)
+==279== 
+==279== Conditional jump or move depends on uninitialised value(s)
+==279==    at 0x402D66: suit_letter (cards.c:72)
+==279==    by 0x402647: describe_hand (test-eval.c:43)
+==279==    by 0x402A67: main (test-eval.c:116)
+==279== 
+==279== Conditional jump or move depends on uninitialised value(s)
+==279==    at 0x402D75: suit_letter (cards.c:75)
+==279==    by 0x402647: describe_hand (test-eval.c:43)
+==279==    by 0x402A67: main (test-eval.c:116)
+==279== 
+==279== Conditional jump or move depends on uninitialised value(s)
+==279==    at 0x402D84: suit_letter (cards.c:78)
+==279==    by 0x402647: describe_hand (test-eval.c:43)
+==279==    by 0x402A67: main (test-eval.c:116)
+==279== 
+==279== 
+==279== HEAP SUMMARY:
+==279==     in use at exit: 896 bytes in 18 blocks
+==279==   total heap usage: 30 allocs, 12 frees, 9,328 bytes allocated
+==279== 
+==279== LEAK SUMMARY:
+==279==    definitely lost: 0 bytes in 0 blocks
+==279==    indirectly lost: 0 bytes in 0 blocks
+==279==      possibly lost: 0 bytes in 0 blocks
+==279==    still reachable: 896 bytes in 18 blocks
+==279==         suppressed: 0 bytes in 0 blocks
+==279== Rerun with --leak-check=full to see details of leaked memory
+==279== 
+==279== For counts of detected and suppressed errors, rerun with: -v
+==279== Use --track-origins=yes to see where uninitialised values come from
+==279== ERROR SUMMARY: 8 errors from 6 contexts (suppressed: 0 from 0)
+Testcase 5: Trying hands with straights
+Valgrind returned an error status
+==284== Memcheck, a memory error detector
+==284== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==284== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==284== Command: ./test-eval inp.5.txt
+==284== Parent PID: 283
+==284== 
+==284== Conditional jump or move depends on uninitialised value(s)
+==284==    at 0x401639: flush_suit (eval.c:29)
+==284==    by 0x40260F: describe_hand (test-eval.c:36)
+==284==    by 0x402A67: main (test-eval.c:116)
+==284== 
+==284== Conditional jump or move depends on uninitialised value(s)
+==284==    at 0x40261D: describe_hand (test-eval.c:37)
+==284==    by 0x402A67: main (test-eval.c:116)
+==284== 
+==284== Conditional jump or move depends on uninitialised value(s)
+==284==    at 0x402D57: suit_letter (cards.c:69)
+==284==    by 0x402647: describe_hand (test-eval.c:43)
+==284==    by 0x402A67: main (test-eval.c:116)
+==284== 
+==284== Conditional jump or move depends on uninitialised value(s)
+==284==    at 0x402D66: suit_letter (cards.c:72)
+==284==    by 0x402647: describe_hand (test-eval.c:43)
+==284==    by 0x402A67: main (test-eval.c:116)
+==284== 
+==284== Conditional jump or move depends on uninitialised value(s)
+==284==    at 0x402D75: suit_letter (cards.c:75)
+==284==    by 0x402647: describe_hand (test-eval.c:43)
+==284==    by 0x402A67: main (test-eval.c:116)
+==284== 
+==284== Conditional jump or move depends on uninitialised value(s)
+==284==    at 0x402D84: suit_letter (cards.c:78)
+==284==    by 0x402647: describe_hand (test-eval.c:43)
+==284==    by 0x402A67: main (test-eval.c:116)
+==284== 
+==284== 
+==284== HEAP SUMMARY:
+==284==     in use at exit: 864 bytes in 16 blocks
+==284==   total heap usage: 26 allocs, 10 frees, 9,216 bytes allocated
+==284== 
+==284== LEAK SUMMARY:
+==284==    definitely lost: 0 bytes in 0 blocks
+==284==    indirectly lost: 0 bytes in 0 blocks
+==284==      possibly lost: 0 bytes in 0 blocks
+==284==    still reachable: 864 bytes in 16 blocks
+==284==         suppressed: 0 bytes in 0 blocks
+==284== Rerun with --leak-check=full to see details of leaked memory
+==284== 
+==284== For counts of detected and suppressed errors, rerun with: -v
+==284== Use --track-origins=yes to see where uninitialised values come from
+==284== ERROR SUMMARY: 6 errors from 6 contexts (suppressed: 0 from 0)
+Testcase 6: Trying hands with flushes
+Valgrind returned an error status
+==289== Memcheck, a memory error detector
+==289== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==289== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==289== Command: ./test-eval inp.6.txt
+==289== Parent PID: 288
+==289== 
+==289== Conditional jump or move depends on uninitialised value(s)
+==289==    at 0x401639: flush_suit (eval.c:29)
+==289==    by 0x40260F: describe_hand (test-eval.c:36)
+==289==    by 0x402A67: main (test-eval.c:116)
+==289== 
+==289== Conditional jump or move depends on uninitialised value(s)
+==289==    at 0x40261D: describe_hand (test-eval.c:37)
+==289==    by 0x402A67: main (test-eval.c:116)
+==289== 
+==289== Conditional jump or move depends on uninitialised value(s)
+==289==    at 0x402D57: suit_letter (cards.c:69)
+==289==    by 0x402647: describe_hand (test-eval.c:43)
+==289==    by 0x402A67: main (test-eval.c:116)
+==289== 
+==289== Conditional jump or move depends on uninitialised value(s)
+==289==    at 0x402D66: suit_letter (cards.c:72)
+==289==    by 0x402647: describe_hand (test-eval.c:43)
+==289==    by 0x402A67: main (test-eval.c:116)
+==289== 
+==289== Conditional jump or move depends on uninitialised value(s)
+==289==    at 0x402D75: suit_letter (cards.c:75)
+==289==    by 0x402647: describe_hand (test-eval.c:43)
+==289==    by 0x402A67: main (test-eval.c:116)
+==289== 
+==289== Conditional jump or move depends on uninitialised value(s)
+==289==    at 0x402D84: suit_letter (cards.c:78)
+==289==    by 0x402647: describe_hand (test-eval.c:43)
+==289==    by 0x402A67: main (test-eval.c:116)
+==289== 
+==289== 
+==289== HEAP SUMMARY:
+==289==     in use at exit: 896 bytes in 18 blocks
+==289==   total heap usage: 30 allocs, 12 frees, 9,328 bytes allocated
+==289== 
+==289== LEAK SUMMARY:
+==289==    definitely lost: 0 bytes in 0 blocks
+==289==    indirectly lost: 0 bytes in 0 blocks
+==289==      possibly lost: 0 bytes in 0 blocks
+==289==    still reachable: 896 bytes in 18 blocks
+==289==         suppressed: 0 bytes in 0 blocks
+==289== Rerun with --leak-check=full to see details of leaked memory
+==289== 
+==289== For counts of detected and suppressed errors, rerun with: -v
+==289== Use --track-origins=yes to see where uninitialised values come from
+==289== ERROR SUMMARY: 6 errors from 6 contexts (suppressed: 0 from 0)
+Testcase 7: Trying hands with full houses
+Valgrind returned an error status
+==294== Memcheck, a memory error detector
+==294== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==294== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==294== Command: ./test-eval inp.7.txt
+==294== Parent PID: 293
+==294== 
+==294== Conditional jump or move depends on uninitialised value(s)
+==294==    at 0x401639: flush_suit (eval.c:29)
+==294==    by 0x40260F: describe_hand (test-eval.c:36)
+==294==    by 0x402A67: main (test-eval.c:116)
+==294== 
+==294== Conditional jump or move depends on uninitialised value(s)
+==294==    at 0x40261D: describe_hand (test-eval.c:37)
+==294==    by 0x402A67: main (test-eval.c:116)
+==294== 
+==294== Conditional jump or move depends on uninitialised value(s)
+==294==    at 0x402D57: suit_letter (cards.c:69)
+==294==    by 0x402647: describe_hand (test-eval.c:43)
+==294==    by 0x402A67: main (test-eval.c:116)
+==294== 
+==294== Conditional jump or move depends on uninitialised value(s)
+==294==    at 0x402D66: suit_letter (cards.c:72)
+==294==    by 0x402647: describe_hand (test-eval.c:43)
+==294==    by 0x402A67: main (test-eval.c:116)
+==294== 
+==294== Conditional jump or move depends on uninitialised value(s)
+==294==    at 0x402D75: suit_letter (cards.c:75)
+==294==    by 0x402647: describe_hand (test-eval.c:43)
+==294==    by 0x402A67: main (test-eval.c:116)
+==294== 
+==294== Conditional jump or move depends on uninitialised value(s)
+==294==    at 0x402D84: suit_letter (cards.c:78)
+==294==    by 0x402647: describe_hand (test-eval.c:43)
+==294==    by 0x402A67: main (test-eval.c:116)
+==294== 
+==294== 
+==294== HEAP SUMMARY:
+==294==     in use at exit: 928 bytes in 20 blocks
+==294==   total heap usage: 34 allocs, 14 frees, 9,456 bytes allocated
+==294== 
+==294== LEAK SUMMARY:
+==294==    definitely lost: 0 bytes in 0 blocks
+==294==    indirectly lost: 0 bytes in 0 blocks
+==294==      possibly lost: 0 bytes in 0 blocks
+==294==    still reachable: 928 bytes in 20 blocks
+==294==         suppressed: 0 bytes in 0 blocks
+==294== Rerun with --leak-check=full to see details of leaked memory
+==294== 
+==294== For counts of detected and suppressed errors, rerun with: -v
+==294== Use --track-origins=yes to see where uninitialised values come from
+==294== ERROR SUMMARY: 9 errors from 6 contexts (suppressed: 0 from 0)
+Testcase 8: Trying hands with 4 of a kind
+Valgrind returned an error status
+==299== Memcheck, a memory error detector
+==299== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==299== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==299== Command: ./test-eval inp.8.txt
+==299== Parent PID: 298
+==299== 
+==299== Conditional jump or move depends on uninitialised value(s)
+==299==    at 0x401639: flush_suit (eval.c:29)
+==299==    by 0x40260F: describe_hand (test-eval.c:36)
+==299==    by 0x402A67: main (test-eval.c:116)
+==299== 
+==299== Conditional jump or move depends on uninitialised value(s)
+==299==    at 0x40261D: describe_hand (test-eval.c:37)
+==299==    by 0x402A67: main (test-eval.c:116)
+==299== 
+==299== Conditional jump or move depends on uninitialised value(s)
+==299==    at 0x402D57: suit_letter (cards.c:69)
+==299==    by 0x402647: describe_hand (test-eval.c:43)
+==299==    by 0x402A67: main (test-eval.c:116)
+==299== 
+==299== Conditional jump or move depends on uninitialised value(s)
+==299==    at 0x402D66: suit_letter (cards.c:72)
+==299==    by 0x402647: describe_hand (test-eval.c:43)
+==299==    by 0x402A67: main (test-eval.c:116)
+==299== 
+==299== Conditional jump or move depends on uninitialised value(s)
+==299==    at 0x402D75: suit_letter (cards.c:75)
+==299==    by 0x402647: describe_hand (test-eval.c:43)
+==299==    by 0x402A67: main (test-eval.c:116)
+==299== 
+==299== Conditional jump or move depends on uninitialised value(s)
+==299==    at 0x402D84: suit_letter (cards.c:78)
+==299==    by 0x402647: describe_hand (test-eval.c:43)
+==299==    by 0x402A67: main (test-eval.c:116)
+==299== 
+==299== 
+==299== HEAP SUMMARY:
+==299==     in use at exit: 896 bytes in 18 blocks
+==299==   total heap usage: 30 allocs, 12 frees, 9,328 bytes allocated
+==299== 
+==299== LEAK SUMMARY:
+==299==    definitely lost: 0 bytes in 0 blocks
+==299==    indirectly lost: 0 bytes in 0 blocks
+==299==      possibly lost: 0 bytes in 0 blocks
+==299==    still reachable: 896 bytes in 18 blocks
+==299==         suppressed: 0 bytes in 0 blocks
+==299== Rerun with --leak-check=full to see details of leaked memory
+==299== 
+==299== For counts of detected and suppressed errors, rerun with: -v
+==299== Use --track-origins=yes to see where uninitialised values come from
+==299== ERROR SUMMARY: 6 errors from 6 contexts (suppressed: 0 from 0)
+Testcase 9: Trying hands with straight flushes
+Valgrind returned an error status
+==304== Memcheck, a memory error detector
+==304== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==304== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==304== Command: ./test-eval inp.9.txt
+==304== Parent PID: 303
+==304== 
+==304== Conditional jump or move depends on uninitialised value(s)
+==304==    at 0x401639: flush_suit (eval.c:29)
+==304==    by 0x40260F: describe_hand (test-eval.c:36)
+==304==    by 0x402A67: main (test-eval.c:116)
+==304== 
+==304== Conditional jump or move depends on uninitialised value(s)
+==304==    at 0x40261D: describe_hand (test-eval.c:37)
+==304==    by 0x402A67: main (test-eval.c:116)
+==304== 
+==304== Conditional jump or move depends on uninitialised value(s)
+==304==    at 0x402D57: suit_letter (cards.c:69)
+==304==    by 0x402647: describe_hand (test-eval.c:43)
+==304==    by 0x402A67: main (test-eval.c:116)
+==304== 
+==304== Conditional jump or move depends on uninitialised value(s)
+==304==    at 0x402D66: suit_letter (cards.c:72)
+==304==    by 0x402647: describe_hand (test-eval.c:43)
+==304==    by 0x402A67: main (test-eval.c:116)
+==304== 
+==304== Conditional jump or move depends on uninitialised value(s)
+==304==    at 0x402D75: suit_letter (cards.c:75)
+==304==    by 0x402647: describe_hand (test-eval.c:43)
+==304==    by 0x402A67: main (test-eval.c:116)
+==304== 
+==304== Conditional jump or move depends on uninitialised value(s)
+==304==    at 0x402D84: suit_letter (cards.c:78)
+==304==    by 0x402647: describe_hand (test-eval.c:43)
+==304==    by 0x402A67: main (test-eval.c:116)
+==304== 
+==304== 
+==304== HEAP SUMMARY:
+==304==     in use at exit: 864 bytes in 16 blocks
+==304==   total heap usage: 26 allocs, 10 frees, 9,216 bytes allocated
+==304== 
+==304== LEAK SUMMARY:
+==304==    definitely lost: 0 bytes in 0 blocks
+==304==    indirectly lost: 0 bytes in 0 blocks
+==304==      possibly lost: 0 bytes in 0 blocks
+==304==    still reachable: 864 bytes in 16 blocks
+==304==         suppressed: 0 bytes in 0 blocks
+==304== Rerun with --leak-check=full to see details of leaked memory
+==304== 
+==304== For counts of detected and suppressed errors, rerun with: -v
+==304== Use --track-origins=yes to see where uninitialised values come from
+==304== ERROR SUMMARY: 6 errors from 6 contexts (suppressed: 0 from 0)
+Testcase 10: Trying each type of hand ranking
+Valgrind returned an error status
+==309== Memcheck, a memory error detector
+==309== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==309== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==309== Command: ./test-eval inp.10.txt
+==309== Parent PID: 308
+==309== 
+==309== Conditional jump or move depends on uninitialised value(s)
+==309==    at 0x401639: flush_suit (eval.c:29)
+==309==    by 0x40260F: describe_hand (test-eval.c:36)
+==309==    by 0x402A67: main (test-eval.c:116)
+==309== 
+==309== Conditional jump or move depends on uninitialised value(s)
+==309==    at 0x40261D: describe_hand (test-eval.c:37)
+==309==    by 0x402A67: main (test-eval.c:116)
+==309== 
+==309== Conditional jump or move depends on uninitialised value(s)
+==309==    at 0x402D57: suit_letter (cards.c:69)
+==309==    by 0x402647: describe_hand (test-eval.c:43)
+==309==    by 0x402A67: main (test-eval.c:116)
+==309== 
+==309== Conditional jump or move depends on uninitialised value(s)
+==309==    at 0x402D66: suit_letter (cards.c:72)
+==309==    by 0x402647: describe_hand (test-eval.c:43)
+==309==    by 0x402A67: main (test-eval.c:116)
+==309== 
+==309== Conditional jump or move depends on uninitialised value(s)
+==309==    at 0x402D75: suit_letter (cards.c:75)
+==309==    by 0x402647: describe_hand (test-eval.c:43)
+==309==    by 0x402A67: main (test-eval.c:116)
+==309== 
+==309== Conditional jump or move depends on uninitialised value(s)
+==309==    at 0x402D84: suit_letter (cards.c:78)
+==309==    by 0x402647: describe_hand (test-eval.c:43)
+==309==    by 0x402A67: main (test-eval.c:116)
+==309== 
+==309== 
+==309== HEAP SUMMARY:
+==309==     in use at exit: 896 bytes in 18 blocks
+==309==   total heap usage: 30 allocs, 12 frees, 9,328 bytes allocated
+==309== 
+==309== LEAK SUMMARY:
+==309==    definitely lost: 0 bytes in 0 blocks
+==309==    indirectly lost: 0 bytes in 0 blocks
+==309==      possibly lost: 0 bytes in 0 blocks
+==309==    still reachable: 896 bytes in 18 blocks
+==309==         suppressed: 0 bytes in 0 blocks
+==309== Rerun with --leak-check=full to see details of leaked memory
+==309== 
+==309== For counts of detected and suppressed errors, rerun with: -v
+==309== Use --track-origins=yes to see where uninitialised values come from
+==309== ERROR SUMMARY: 6 errors from 6 contexts (suppressed: 0 from 0)
+
+Overall Grade: F
