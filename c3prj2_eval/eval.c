@@ -3,9 +3,6 @@
 #include <stdlib.h>
 #include <assert.h>
 
-int is_n_length_straight_at(deck_t * hand, size_t index, suit_t fs, int n);
-int is_ace_low_straight_at(deck_t * hand, size_t index, suit_t fs);
-
 int card_ptr_comp(const void * vp1, const void * vp2) {
   const card_t* cp1 = (card_t*) vp1;
   const card_t* cp2 = (card_t*) vp2;
@@ -26,8 +23,8 @@ suit_t flush_suit(deck_t * hand) {
   int count[4];
 
   for (int i = 0; i < hand->n_cards; i++) {
-    if(++count[(*(hand->cards[i])).suit] >= 5) {
-      return count[(*(hand->cards[i])).suit];
+    if(++count[hand->cards[i].suit] >= 5) {
+      return count[hand->cards[i].suit];
     }
   }
   return NUM_SUITS;
@@ -55,7 +52,7 @@ size_t get_match_index(unsigned * match_counts, size_t n, unsigned n_of_akind){
 
 ssize_t find_secondary_pair(deck_t * hand, unsigned * match_counts, size_t match_idx) {
   for (int i = match_idx; i < hand->n_cards; i++) {
-    if (match_counts[i] > 1 && match_counts[i] != match_counts[match_idx]) {
+    if (match_counts[i] > 1 && match_counts[i] != match_counts[idx]) {
       return i;
     }
   }
@@ -63,7 +60,7 @@ ssize_t find_secondary_pair(deck_t * hand, unsigned * match_counts, size_t match
 }
 
 int is_straight_at(deck_t * hand, size_t index, suit_t fs) {
-  if ((*(hand->cards[index])).value == 14) {
+  if ((*(deck_t->cards[index])).value == 14) {
     return is_ace_low_straight_at(hand, index, fs);
   } else {
     return is_n_length_straight_at(hand, index, fs, 5);
@@ -102,7 +99,7 @@ int is_ace_low_straight_at(deck_t * hand, size_t index, suit_t fs) {
   if (fs != NUM_SUITS && (*(hand->cards[index])).suit != (*(hand->cards[five_idx])).suit) {
     return 0;
   }
-  if (is_n_length_straight_at(hand, five_idx, fs, 4) == 1) {
+  if (is_n_length_straight_at(hand, five_idx, fs) == 1) {
     return -1;
   } else {
     return 0;
@@ -110,20 +107,19 @@ int is_ace_low_straight_at(deck_t * hand, size_t index, suit_t fs) {
 }
 
 hand_eval_t build_hand_from_match(deck_t * hand, unsigned n, hand_ranking_t what, size_t idx) {
-  //card_t* cards[5];
-  hand_eval_t ans;
-  ans.ranking = what;
+  card_t* cards[5];
   int i, k;
 
   for (i = 0; i < n; i++) {
-    ans.cards[i] = hand->cards[idx + i];
+    cards[i] = hand->cards[idx + i];
   }
   for (i = 0, k = n; i < hand->n_cards; i++) {
     if (!(i >= idx && i < idx + n)) {
-      ans.cards[k++] = hand->cards[i];
+      cards[k++] = hand->cards[i];
     }
   }
-  
+
+  hand_eval_t ans = {what, cards};
   return ans;
 }
 
@@ -142,7 +138,7 @@ int compare_hands(deck_t * hand1, deck_t * hand2) {
   }
 
   for (int i = 0; i < 5; i++) {
-    int res = (*(h1.cards[i])).value - (*(h2.cards[i])).value;
+    int res = (*(h1->cards[i])).value - (*(h2->cards[i])).value;
     if (!res) {
       return res;
     }
