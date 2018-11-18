@@ -80,19 +80,27 @@ int is_straight_at(deck_t * hand, size_t index, suit_t fs) {
 
 int is_n_length_straight_at(deck_t * hand, size_t index, suit_t fs, int n) {
   for (int i = index; i < index + n - 1; i++) {
-    card_t c1 = *(hand->cards[i]);
-    card_t c2 = *(hand->cards[i + 1]);
+    //card_t c1 = *(hand->cards[i]);
+    //card_t c2 = *(hand->cards[i + 1]);
 
-    if (fs == NUM_SUITS) {
-      if (c1.value != c2.value + 1) {
-	return 0;
-      }
-    } else if (c1.value != c2.value + 1 || c1.suit != c2.suit) {
-      return 0;
+    while (i < index + n - 2 && hand->cards[i]->value == hand->cards[i + 1]->value) { //FIXME
+      i++;
     }
 
+    if (!(i < index + n - 2)) { //FIXME
+      continue;
+    }
+    
+    if (fs == NUM_SUITS) {
+      if (hand->cards[i]->value != hand->cards[i + 1]->value + 1) {
+        return 0;
+      }
+    } else if (hand->cards[i]->value != hand->cards[i + 1]->value + 1 ||
+               hand->cards[i]->suit != hand->cards[i + 1]->suit) {
+      return 0;
+    }
   }
-  return 1;
+  return 1; 
 }
 
 int is_ace_low_straight_at(deck_t * hand, size_t index, suit_t fs) {
