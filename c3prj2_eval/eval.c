@@ -110,20 +110,24 @@ int is_ace_low_straight_at(deck_t * hand, size_t index, suit_t fs) {
 }
 
 hand_eval_t build_hand_from_match(deck_t * hand, unsigned n, hand_ranking_t what, size_t idx) {
-  //card_t* cards[5];
-  hand_eval_t ans;
-  ans.ranking = what;
+  card_t* cards[5];
   int i, k;
 
   for (i = 0; i < n; i++) {
-    ans.cards[i] = hand->cards[idx + i];
+    cards[i] = hand->cards[idx + i];
   }
   for (i = 0, k = n; i < hand->n_cards; i++) {
     if (!(i >= idx && i < idx + n)) {
-      ans.cards[k++] = hand->cards[i];
+      cards[k++] = hand->cards[i];
     }
   }
-  
+
+  hand_eval_t ans;
+  ans.ranking = what;
+
+  for (int i = 0; i < 5; i++) {
+    ans.cards[i] = cards[i];
+  }
   return ans;
 }
 
