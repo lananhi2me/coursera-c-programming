@@ -73,7 +73,8 @@ int is_straight_at(deck_t * hand, size_t index, suit_t fs) {
 }
 
 int is_n_length_straight_at(deck_t * hand, size_t index, suit_t fs, int n) { //FIXME
-  for (int i = index; i < index + n - 1 && (i + index + n - 1) < hand->n_cards; i++) {
+  //  for (int i = index; i < index + n - 1 && (i + index + n - 1) < hand->n_cards; i++) {
+  for (int i = index; i < index + n - 1; i++) {
     card_t c1 = *(hand->cards[i]);
     card_t c2 = *(hand->cards[i + 1]);
 
