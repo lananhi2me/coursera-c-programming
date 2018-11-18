@@ -56,7 +56,7 @@ size_t get_match_index(unsigned * match_counts, size_t n, unsigned n_of_akind){
 }
 
 ssize_t find_secondary_pair(deck_t * hand, unsigned * match_counts, size_t match_idx) {
-  for (int i = match_idx + match_counts[match_idx]; i < hand->n_cards - match_counts[match_idx]; i++) {
+  for (int i = match_idx + match_counts[match_idx]; i < hand->n_cards; i++) {
     if (match_counts[i] > 1 && i != match_idx) {
       return i;
     }
@@ -66,7 +66,12 @@ ssize_t find_secondary_pair(deck_t * hand, unsigned * match_counts, size_t match
 
 int is_straight_at(deck_t * hand, size_t index, suit_t fs) {
   if ((*(hand->cards[index])).value == 14) {
-    return is_ace_low_straight_at(hand, index, fs);
+    int ace = is_ace_low_straight_at(hand, index, fs);
+    if (ace) {
+      return ace;
+    } else {
+      return is_n_length_straight_at(hand, index, fs, 5);
+    }
   } else {
     return is_n_length_straight_at(hand, index, fs, 5);
   }
@@ -78,10 +83,10 @@ int is_n_length_straight_at(deck_t * hand, size_t index, suit_t fs, int n) {
     card_t c2 = *(hand->cards[i + 1]);
 
     if (fs == NUM_SUITS) {
-      if (c1.value != c2.value - 1) {
+      if (c1.value != c2.value + 1) {
 	return 0;
       }
-    } else if (c1.value != c2.value - 1 || c1.suit != c2.suit) {
+    } else if (c1.value != c2.value + 1 || c1.suit != c2.suit) {
       return 0;
     }
 
