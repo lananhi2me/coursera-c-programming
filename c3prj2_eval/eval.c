@@ -7,27 +7,29 @@ int is_n_length_straight_at(deck_t * hand, size_t index, suit_t fs, int n);
 int is_ace_low_straight_at(deck_t * hand, size_t index, suit_t fs);
 
 int card_ptr_comp(const void * vp1, const void * vp2) {
-  const card_t* cp1 = (card_t*) vp1;
-  const card_t* cp2 = (card_t*) vp2;
+  card_t cp1 = *(card_t*) vp1;
+  card_t cp2 = *(card_t*) vp2;
 
-  if (cp1->value > cp2->value) {
+  if (cp1.value > cp2.value) {
     return -1;
-  } else if (cp1->value < cp2->value) {
+  } else if (cp1.value < cp2.value) {
     return 1;
-  } else if (cp1->suit > cp2->suit) {
+  } else if (cp1.suit > cp2.suit) {
     return -1;
-  } else if (cp1->suit < cp2->suit) {
+  } else if (cp1.suit < cp2.suit) {
     return 1;
   }
   return 0;
 }
 
 suit_t flush_suit(deck_t * hand) {
-  int count[4];
+  int count[4] = {0, 0, 0, 0};
 
   for (int i = 0; i < hand->n_cards; i++) {
-    if(++count[(*(hand->cards[i])).suit] >= 5) {
-      return count[(*(hand->cards[i])).suit];
+    int suit = (*(hand->cards[i])).suit;
+    count[suit]++;
+    if(count[suit] >= 5) {
+      return suit;
     }
   }
   return NUM_SUITS;

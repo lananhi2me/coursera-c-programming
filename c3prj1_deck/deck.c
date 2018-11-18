@@ -5,6 +5,9 @@
 
 void print_hand(deck_t* hand){
   for (int i = 0; i < hand->n_cards; i++) {
+    if (hand->cards[i] == NULL) {
+      printf("Null card pointer");
+    }
     print_card(*(hand->cards[i]));
   }
 }

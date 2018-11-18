@@ -6,5 +6,7 @@ test-eval: deck.o eval.o eval-c4.o test-eval.o deck-c4.o cards.o input.o future.
 	gcc -o test-eval -ggdb3 deck.o deck-c4.o eval-c4.o eval.o test-eval.o cards.o input.o future.o
 poker: $(GIVEN_OBJS) $(MY_OBJS)
 	gcc -o poker -ggdb3  $(MY_OBJS) $(GIVEN_OBJS)
+my-test: deck.o eval.o eval-c4.o test-eval.o deck-c4.o cards.o input.o future.o
+	gcc -g -o test-eval -ggdb3 deck.o deck-c4.o eval-c4.o eval.o test-eval.o cards.o input.o future.o
 clean:
 	rm test-eval deck.o eval.o cards.o #poker
