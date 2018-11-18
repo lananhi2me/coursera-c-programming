@@ -119,7 +119,12 @@ hand_eval_t build_hand_from_match(deck_t * hand, unsigned n, hand_ranking_t what
     }
   }
 
-  hand_eval_t ans = {what, cards};
+  hand_eval_t ans;
+  ans.ranking = what;
+
+  for (int i = 0; i < 5; i++) {
+    ans.cards[i] = cards[i];
+  }
   return ans;
 }
 
