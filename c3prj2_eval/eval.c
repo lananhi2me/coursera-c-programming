@@ -82,7 +82,7 @@ int is_n_length_straight_at(deck_t * hand, size_t index, suit_t fs, int n) {
   int count = 0;
 
   for (int i = index; i < hand->n_cards - 1 && count < n - 1; i++) {
-    if (hand->cards[i]->value == hand->cards[i + 1]->value) {
+    if (hand->cards[i]->value == hand->cards[i + 1]->value) { // Can skip over the 'wrong' card, missing flushes, could try to use an array of equal-value cards and check their suits
       continue;
     }
     if (fs == NUM_SUITS) {
@@ -113,7 +113,7 @@ int is_ace_low_straight_at(deck_t * hand, size_t index, suit_t fs) {
   if (five_idx == -1) {
     return 0;
   }
-  if (fs != NUM_SUITS && (*(hand->cards[index])).suit != (*(hand->cards[five_idx])).suit) {
+  if (fs != NUM_SUITS && hand->cards[index]->suit != hand->cards[five_idx]->suit) {
     return 0;
   }
   if (is_n_length_straight_at(hand, five_idx, fs, 4) == 1) {
