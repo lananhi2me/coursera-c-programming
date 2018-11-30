@@ -5,6 +5,14 @@ Kc Ac Jh 8s 9c 2s ; Ah Kh 0s 7c 7h 3c
 9d 7s 6c 4h 2d ; 9h 7c 6s 4d 3c
 Ac As Kc Kh 4d ; Ad Ah Kd Ks 3h
 Js 7c 7h 4s 3d 3h ; Qs 7d 7s 5c 2d 2h
+As Ks Qs Js 0s ; Kh Qh Jh 0h 9h
+As Kd Kh Ks 7c 7h 2c ; Ad Ah As 8c 8d 8h
+Kh Ks 8c 7c 7d 7h ; Kh Ks 9d 3c 3h 3s 2c
+Ac As Kc Ks Qs Js 0s ; Ad Kh Qh Jh Js 0h 9h
+As Ks Qs Js 0s 9s 8s ; Ad Ah Kd Kc 3h
+As Kh Qc Jd 0s ; 2d 4h 4s 6d 8c
+Qh Qs Jd Js 0c 0s 9d 8c ; Kc Qh Qs Jd Js 0c 0s 9d
+Jh 0s 9c 8s 7c 4c 3d ; Jh 0s 9c 8s 7c 6c 5d
 
 rbreak cards.c:.
 rbreak deck.c:.
