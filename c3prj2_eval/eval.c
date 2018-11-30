@@ -26,7 +26,7 @@ suit_t flush_suit(deck_t * hand) {
   int count[4] = {0, 0, 0, 0};
 
   for (int i = 0; i < hand->n_cards; i++) {
-    int suit = (*(hand->cards[i])).suit;
+    int suit = hand->cards[i]->suit;
     count[suit]++;
     if(count[suit] >= 5) {
       return suit;
@@ -66,7 +66,7 @@ ssize_t find_secondary_pair(deck_t * hand, unsigned * match_counts, size_t match
 }
 
 int is_straight_at(deck_t * hand, size_t index, suit_t fs) {
-  if ((*(hand->cards[index])).value == 14) {
+  if (hand->cards[index]->value == 14) {
     int ace = is_ace_low_straight_at(hand, index, fs);
     if (ace) {
       return ace;
@@ -79,35 +79,33 @@ int is_straight_at(deck_t * hand, size_t index, suit_t fs) {
 }
 
 int is_n_length_straight_at(deck_t * hand, size_t index, suit_t fs, int n) {
-  for (int i = index; i < index + n - 1; i++) {
-    //card_t c1 = *(hand->cards[i]);
-    //card_t c2 = *(hand->cards[i + 1]);
+  int count = 0;
 
-    while (i < index + n - 2 && hand->cards[i]->value == hand->cards[i + 1]->value) { //FIXME
-      i++;
-    }
-
-    if (!(i < index + n - 2)) { //FIXME
+  for (int i = index; (i < hand->n_cards - 1) && (i < index + n - 1); i++) {
+    if (hand->cards[i]->value == hand->cards[i + 1]->value) {
       continue;
     }
-    
     if (fs == NUM_SUITS) {
       if (hand->cards[i]->value != hand->cards[i + 1]->value + 1) {
         return 0;
       }
-    } else if (hand->cards[i]->value != hand->cards[i + 1]->value + 1 ||
-               hand->cards[i]->suit != hand->cards[i + 1]->suit) {
+    } else if (hand->cards[i]->value != hand->cards[i + 1]->value + 1 || hand->cards[i]->suit != hand->cards[i + 1]->suit) {
       return 0;
     }
+    count++;
   }
-  return 1; 
+  if (count >= n - 1) {
+    return 1;
+  } else {
+    return 0;
+  }
 }
 
 int is_ace_low_straight_at(deck_t * hand, size_t index, suit_t fs) {
   int five_idx = -1;
 
   for (int i = index + 1; i < hand->n_cards; i++) {
-    if ((*(hand->cards[i])).value == 5) {
+    if (hand->cards[i]->value == 5) {
       five_idx = i;
       break;
     }
