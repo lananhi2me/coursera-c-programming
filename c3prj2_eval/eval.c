@@ -9,7 +9,7 @@ int is_ace_low_straight_at(deck_t * hand, size_t index, suit_t fs);
 int card_ptr_comp(const void* vp1, const void* vp2) {
   card_t* cp1 = *(card_t**) vp1;
   card_t* cp2 = *(card_t**) vp2;
-  
+
   if (cp1->value > cp2->value) {
     return -1;
   } else if (cp1->value < cp2->value) {
@@ -79,23 +79,34 @@ int is_straight_at(deck_t * hand, size_t index, suit_t fs) {
 }
 
 int is_n_length_straight_at(deck_t * hand, size_t index, suit_t fs, int n) {
-  int count = 0;
+  int s_count = 0;
+  int f_count = 0;
 
   for (int i = index; i < hand->n_cards - 1 && count < n - 1; i++) {
     if (hand->cards[i]->value == hand->cards[i + 1]->value) { // Can skip over the 'wrong' card, missing flushes, could try to use an array of equal-value cards and check their suits
+      if (hand->cards[i]->suit == fs) {
+        f_count++;
+      }
       continue;
     }
-    if (fs == NUM_SUITS) {
-      if (hand->cards[i]->value != hand->cards[i + 1]->value + 1) {
-        return 0;
-      }
-    } else if (hand->cards[i]->value != hand->cards[i + 1]->value + 1 || hand->cards[i]->suit != hand->cards[i + 1]->suit) {
+    if (hand->cards[i]->value != hand->cards[i + 1]->value + 1) {
       return 0;
     }
-    count++;
+    if (fs == NUM_SUITS) {
+      if (hand->cards[i]->suit == fs) {
+        f_count++;
+      }
+    }
+    s_count++;
   }
-  if (count >= n - 1) {
-    return 1;
+  if (fs == NUM_SUITS) {
+    if (s_count >= n - 1) {
+      return 1;
+    } else {
+      return 0;
+    }
+  } else if (s_count >= n - 1 && f_count >= n - 1) {
+    return 1
   } else {
     return 0;
   }
