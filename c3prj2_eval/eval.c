@@ -67,6 +67,9 @@ ssize_t find_secondary_pair(deck_t * hand, unsigned * match_counts, size_t match
 
 int is_straight_at(deck_t * hand, size_t index, suit_t fs) {
   if (hand->cards[index]->value == 14) {
+    if (fs != NUM_SUITS && hand->cards[index]->suit != fs) {
+      return 0;
+    }
     int ace = is_ace_low_straight_at(hand, index, fs);
     if (ace) {
       return ace;
