@@ -82,9 +82,9 @@ int is_n_length_straight_at(deck_t * hand, size_t index, suit_t fs, int n) {
   int s_count = 0;
   int f_count = 0;
 
-  for (int i = index; i < hand->n_cards - 1 && count < n - 1; i++) {
-    if (hand->cards[i]->value == hand->cards[i + 1]->value) { // Can skip over the 'wrong' card, missing flushes, could try to use an array of equal-value cards and check their suits
-      if (hand->cards[i]->suit == fs) {
+  for (int i = index; i < hand->n_cards - 1 && s_count < n - 1; i++) {
+    if (hand->cards[i]->value == hand->cards[i + 1]->value) {
+      if (fs != NUM_SUITS && hand->cards[i]->suit == fs) {
         f_count++;
       }
       continue;
@@ -92,7 +92,7 @@ int is_n_length_straight_at(deck_t * hand, size_t index, suit_t fs, int n) {
     if (hand->cards[i]->value != hand->cards[i + 1]->value + 1) {
       return 0;
     }
-    if (fs == NUM_SUITS) {
+    if (fs != NUM_SUITS) {
       if (hand->cards[i]->suit == fs) {
         f_count++;
       }
@@ -106,7 +106,7 @@ int is_n_length_straight_at(deck_t * hand, size_t index, suit_t fs, int n) {
       return 0;
     }
   } else if (s_count >= n - 1 && f_count >= n - 1) {
-    return 1
+    return 1;
   } else {
     return 0;
   }
